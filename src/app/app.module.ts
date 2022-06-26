@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/services/auth.guard';
 import { EffectsModule } from '@ngrx/effects';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -40,6 +41,7 @@ import { HttpConfigInterceptor } from './auth/interceptor/httpconfig.interceptor
       useClass: HttpConfigInterceptor,
       multi: true
     },
+    [AuthGuard]
   ],
   bootstrap: [AppComponent]
 })

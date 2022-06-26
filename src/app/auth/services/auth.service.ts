@@ -1,3 +1,4 @@
+import { PersistanceService } from './persistance.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -11,7 +12,16 @@ export class AuthService {
         private store: Store,
         private http: HttpClient,
         private router: Router,
+        private persistanceService:PersistanceService
     ) { }
+
+    isAuthenticated(): boolean{
+        const localStorageToken = this.persistanceService.getToken('auth');
+        if(!localStorageToken){
+            return false
+        }
+        return true
+    }
 
     login(loginData: any) {
         return this.http.post(`${environment.apiUrl}/system/common/tokens/auth`, loginData)

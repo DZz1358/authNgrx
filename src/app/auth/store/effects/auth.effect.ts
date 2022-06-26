@@ -44,7 +44,7 @@ export class AuthEffect {
         this.actions$.pipe(
             ofType(loginSuccessAction),
             tap((data) => {
-                console.log(data,' 111!!!!');
+                // console.log(data,' 111!!!!');
                 this.persistanceService.setToken('auth', data.currentUser.authToken)
                 
             })

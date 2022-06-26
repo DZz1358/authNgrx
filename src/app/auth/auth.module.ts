@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'afterLogin',
-    component: AfterLoginComponent
+    component: AfterLoginComponent,
+    canActivate: [AuthGuard]
   }
 ]
 
