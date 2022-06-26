@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { selectUserToken } from '../store/selectors/auth.selector';
+import { selectUserGetToken, selectUserToken } from '../store/selectors/auth.selector';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.store.pipe(
-      select(selectUserToken),
+      select(selectUserGetToken),
       map((token: { accessToken: any }) => {
         if (!token?.accessToken) {
           this.router.navigate(['/login'], { queryParams: { redirect: state.url }, replaceUrl: true });

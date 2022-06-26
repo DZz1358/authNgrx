@@ -1,3 +1,4 @@
+import { PersistanceService } from './../../services/persistance.service';
 import { AuthService } from './../../services/auth.service';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -13,7 +14,8 @@ export class AuthEffect {
     constructor(
         private authService: AuthService,
         private actions$: Actions,
-        private router: Router
+        private router: Router,
+        private persistanceService: PersistanceService
     ) { }
 
     login$ = createEffect(() =>
@@ -26,7 +28,7 @@ export class AuthEffect {
                     loginRedirect()
                 ]),
                 catchError(error => of(loginFailureAction({ error })))
-            ))
+            )),
         )
     );
 
@@ -38,4 +40,15 @@ export class AuthEffect {
         { dispatch: false }
     );
 
+    loginSuccessAction$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(loginSuccessAction),
+            tap((data) => {
+                console.log(data,' 111!!!!');
+                this.persistanceService.setToken('auth', data.currentUser.authToken)
+                
+            })
+        ),
+        { dispatch: false }
+    );
 }

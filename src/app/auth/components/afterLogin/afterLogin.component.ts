@@ -1,4 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { selectUserToken } from '../../store/selectors/auth.selector';
 
 @Component({
   selector: 'app-afterLogin',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AfterLoginComponent implements OnInit {
 
-  constructor() { }
+  token = this.store.pipe(select(selectUserToken))
+
+
+  constructor(
+    private store: Store,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.authService.getUnits().subscribe(data => {
+      console.log(data);
+    });
+
+    // console.log(this.token);
+    this.store.pipe(select(selectUserToken)).subscribe(token =>{
+      console.log(token);
+
+    })
   }
 
 }

@@ -1,3 +1,4 @@
+import { PersistanceService } from './services/persistance.service';
 import { AuthGuard } from './services/auth.guard';
 import { AfterLoginComponent } from './components/afterLogin/afterLogin.component';
 import { AuthService } from './services/auth.service';
@@ -9,7 +10,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { reducer } from './store/reducers/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffect } from './store/effects/auth.effect';
@@ -43,7 +44,8 @@ const routes: Routes = [
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    PersistanceService
   ]
 })
 export class AuthModule { }

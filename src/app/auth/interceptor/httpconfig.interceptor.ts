@@ -1,23 +1,23 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
-import { first, Observable } from "rxjs";
-import { selectUserToken } from "../store/selectors/auth.selector";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { PersistanceService } from "../services/persistance.service";
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     constructor(
         private store: Store,
+        private persistanceService: PersistanceService
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = this.store.pipe(select(selectUserToken),
-        first())
-        console.log(token);
+        const localStorageToken = this.persistanceService.getToken('auth');
         
-        if(!!token){
-            req = req.clone({setHeaders: {Authorization: `Bearer ${token}`}})
-        }
-        return next.handle(req)
+        const authReq = !!localStorageToken ? req.clone({
+
+            setHeaders: { Authorization: 'Bearer ' +  localStorageToken.accessToken},
+        }) : req;
+        return next.handle(authReq);
     }
 }

@@ -3,9 +3,14 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export const authKey = 'auth';
 
-export const authFeatureSelector = createFeatureSelector<AuthStateInterface>(authKey);
+const authFeatureSelector = createFeatureSelector<AuthStateInterface>(authKey);
 
 export const selectUserToken = createSelector(
     authFeatureSelector,
     (state) => state.authToken
+);
+
+export const selectUserGetToken = createSelector(
+    selectUserToken,
+    (authToken) => authToken.accessToken
 );
