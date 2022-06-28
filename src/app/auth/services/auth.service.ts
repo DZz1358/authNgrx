@@ -26,9 +26,14 @@ export class AuthService {
     login(loginData: any) {
         return this.http.post(`${environment.apiUrl}/system/common/tokens/auth`, loginData)
     }
-
+    
     getUnits(): Observable<any>{
-        return this.http.get(`${environment.apiUrl}/organization/employees/current`)
+        return this.http.get(`${environment.apiUrl}/organization/structure/units`)
     }
-
+    
+    signOut() {
+        localStorage.clear();
+        this.router.navigate(['/login']);
+    }
+    
 }
