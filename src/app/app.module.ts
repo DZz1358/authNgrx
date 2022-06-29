@@ -45,4 +45,4 @@ import { HttpConfigInterceptor } from './auth/interceptor/httpconfig.interceptor
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

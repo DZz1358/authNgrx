@@ -29,10 +29,6 @@ export class AfterLoginComponent implements OnInit {
 
   ngOnInit() {
     this.getDepartments()
-    // console.log(this.token);
-    // this.store.pipe(select(selectUserToken)).subscribe(token => {
-    //   console.log(token);
-    // })
   }
 
   getDepartments() {
@@ -40,9 +36,6 @@ export class AfterLoginComponent implements OnInit {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     })
-    // this.authService.getUnits().subscribe(data => {
-    //   console.log(data);
-    // });
   }
 
 
