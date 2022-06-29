@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { reducer } from './store/reducers/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffect } from './store/effects/auth.effect';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 const routes: Routes = [
@@ -35,6 +37,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('auth', reducer, {}),
     EffectsModule.forFeature([AuthEffect]),

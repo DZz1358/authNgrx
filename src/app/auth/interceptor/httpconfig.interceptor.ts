@@ -17,8 +17,16 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         return next.handle(authReq).pipe(
             catchError((error: HttpErrorResponse) => {
                 console.log(error.error);
-                alert(error.error.ErrorMessage)
-                return throwError(error.error);
+                switch (error.status) {
+                    case 401:
+                        alert('401 error')
+                        break;
+                    case 400:
+                        alert('400 error')
+                        break;
+                    default:
+                }
+                return throwError(error);
             })
         )
     }
