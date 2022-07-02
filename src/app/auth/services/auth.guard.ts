@@ -1,8 +1,6 @@
 import { AuthService } from './auth.service';
-import { PersistanceService } from './persistance.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 @Injectable({

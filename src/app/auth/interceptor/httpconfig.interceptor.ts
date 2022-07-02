@@ -16,13 +16,12 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }) : req;
         return next.handle(authReq).pipe(
             catchError((error: HttpErrorResponse) => {
-                console.log(error.error);
                 switch (error.status) {
+                    case 400:
+                        alert('incorrect username or password / 400 error')
+                        break;
                     case 401:
                         alert('401 error')
-                        break;
-                    case 400:
-                        alert('400 error')
                         break;
                     default:
                 }

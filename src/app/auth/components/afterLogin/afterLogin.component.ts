@@ -1,11 +1,9 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { selectUserToken } from '../../store/selectors/auth.selector';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-afterLogin',
@@ -18,13 +16,8 @@ export class AfterLoginComponent implements OnInit {
   public dataSource = new MatTableDataSource();
   @ViewChild('paginator') paginator!: MatPaginator;
 
-  token = this.store.pipe(select(selectUserToken))
-
-
   constructor(
-    private store: Store,
     private authService: AuthService,
-    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -37,6 +30,5 @@ export class AfterLoginComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     })
   }
-
 
 }
